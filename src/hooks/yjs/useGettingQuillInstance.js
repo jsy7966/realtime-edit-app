@@ -1,4 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from "react"
+import QuillCursors from "quill-cursors"
+
+window.Quill.register('modules/cursors', QuillCursors)
 
 export const useGettingQuillInstance = () => {
   const [quillInstance, setQuillInstance] = useState()
@@ -10,18 +13,30 @@ export const useGettingQuillInstance = () => {
         nIntervId = setInterval(getQuillInstance, 1000)
       }
     }
-  
-    function getQuillInstance() {
-      if (window.quillInstance && !quillInstance) setQuillInstance(window.quillInstance)
+
+    function stopGettingQuillInstance() {
+      clearInterval(nIntervId)
+      nIntervId = null
     }
-    getQuillInstanceWithInterval()
-    return (() => {
-      function stopGettingQuillInstance() {
-        clearInterval(nIntervId)
-        nIntervId = null
+
+    function getQuillInstance() {
+      if (document.getElementById('quill-container') && !quillInstance) {
+        const _quillInstance = new window.Quill(document.getElementById('quill-container'), {
+          theme: 'snow',
+          modules: {
+            table: true,
+            cursors: true,
+            toolbar: {
+              container: document.getElementById('toolbar')
+            }
+          }
+        })
+        setQuillInstance(_quillInstance)
+        stopGettingQuillInstance()
       }
-      stopGettingQuillInstance()
-    })
+    }
+
+    getQuillInstanceWithInterval()
   }, [])
 
   return quillInstance

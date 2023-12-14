@@ -6,18 +6,6 @@ import { useGettingWsStatus } from '../../hooks/yjs/useGettingWsStatus.js'
 import { useGettingQuillInstance } from '../../hooks/yjs/useGettingQuillInstance.js'
 
 export default function YjsQuillEditor ({ roomName }) {
-  useEffect(() => {
-    const script = document.createElement('script')
-    script.type = 'text/javascript'
-    script.src = './loadQuillEditor.js'
-    
-    document.body.append(script)
-
-    return (() => {
-      document.body.remove(script)
-    })
-  }, [])
-
   const quillInstance = useGettingQuillInstance()
   const { ydoc, wsProvider } = useYjsWebsocket(roomName)
   const { isBindingFinished } = useBindingQuill(quillInstance, ydoc, wsProvider)
@@ -31,4 +19,3 @@ export default function YjsQuillEditor ({ roomName }) {
     </>
   )
 }
-
