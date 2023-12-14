@@ -4,7 +4,6 @@ import { useBindingQuill } from '../../hooks/yjs/useBindingQuill.js'
 import { useYjsWebsocket } from '../../hooks/yjs/useYjsWebsocket.js'
 import { useGettingWsStatus } from '../../hooks/yjs/useGettingWsStatus.js'
 import { useGettingQuillInstance } from '../../hooks/yjs/useGettingQuillInstance.js'
-import { Button } from 'antd'
 
 export default function YjsQuillEditor ({ roomName }) {
   useEffect(() => {
@@ -32,3 +31,4 @@ export default function YjsQuillEditor ({ roomName }) {
     </>
   )
 }
+
