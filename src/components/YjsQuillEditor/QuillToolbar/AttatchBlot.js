@@ -1,14 +1,16 @@
 import { Button } from "antd"
 const data = [
-  ['', ''],
-  ['', ''],
-  ['', '']
+  ['a', 'a'],
+  ['a', 'a'],
+  ['a', 'a']
 ]
+const ratio = [0.3, 0.7]
 const AttatchBlot = ({ quillInstance }) => {
     const attatchBlot = () => {
       const range = quillInstance.getSelection(true)
       const value = {
-        data
+        data,
+        ratio
       }
     
       quillInstance.insertEmbed(range.index, 'table-attachment', value)
