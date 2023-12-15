@@ -1,7 +1,13 @@
-import { useEffect, useState } from "react"
-import QuillCursors from "quill-cursors"
+import { useEffect, useState } from 'react'
+import QuillCursors from 'quill-cursors'
 
-window.Quill.register('modules/cursors', QuillCursors)
+import AddTableBlot from './customModules/tableBlot'
+
+const { Quill } = window
+
+Quill.register('modules/cursors', QuillCursors)
+
+Quill.register(AddTableBlot)
 
 export const useGettingQuillInstance = () => {
   const [quillInstance, setQuillInstance] = useState()
@@ -24,7 +30,7 @@ export const useGettingQuillInstance = () => {
         const _quillInstance = new window.Quill(document.getElementById('quill-container'), {
           theme: 'snow',
           modules: {
-            table: true,
+            table: false,
             cursors: true,
             toolbar: {
               container: document.getElementById('toolbar')
@@ -38,6 +44,15 @@ export const useGettingQuillInstance = () => {
 
     getQuillInstanceWithInterval()
   }, [])
+
+  useEffect(() => {
+    if (quillInstance) {
+      quillInstance.on('text-change', function() {
+        var text = quillInstance.getContents()
+        console.log(text)
+      })
+    }
+  }, [quillInstance])
 
   return quillInstance
 }

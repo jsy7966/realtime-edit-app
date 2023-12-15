@@ -2,6 +2,7 @@ import { Button, Dropdown } from 'antd'
 import { TableOutlined } from '@ant-design/icons'
 import { useState } from 'react'
 import { TableTool } from './TableTool'
+import AttatchBlot from './AttatchBlot'
 
 export const QuillToolbar = ({ quillInstance }) => {
   return(
@@ -88,6 +89,11 @@ export const QuillToolbar = ({ quillInstance }) => {
 
         <span className="ql-formats">
           <TableTool quillInstance={quillInstance} />
+        </span>
+
+        <span className="ql-formats">
+          <AttatchBlot quillInstance={quillInstance} />
+          <button className='ql-emoji'></button>
         </span>
       </div>
     </>
